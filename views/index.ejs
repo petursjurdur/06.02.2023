@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <head>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<h1>Chat app</h1>
+<h3>you are logged in as <%= name %></h3>
+<div id="chatters"></div>
+<h2>Skriv besked</h2>
+<form action="/addMessage" id="chatForm" method="post">
+  <input type="text" name="message" id="message">
+  <input type="submit" value="Submit">
+</form>
+<h2>Messages</h2>
+<% messages.forEach(message => { %>
+  <p><%= message.username %>: <%= message.message %> </p>
+<% }) %>
+<div id="messagesContainer"></div>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/script.js"></script>
+
+
+</head>
+
+<form action="/logout" method="get">
+  <button type="submit">Log Out</button>
+</form>
+</html>
