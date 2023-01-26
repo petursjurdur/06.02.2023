@@ -5,18 +5,10 @@ if (process.env.NODE_ENV !== 'production') {
   const express = require('express')
   const app = express()
   const bcrypt = require('bcrypt')
-  const passport = require('passport')
   const flash = require('express-flash')
   const session = require('express-session')
   const methodOverride = require('method-override')
-  const io = require('socket.io')
   
-  /*io.on('connection', socket =>{
-    socket.emit('chat-message', 'User Connected')
-    socket.on('send-chat-message', message =>{
-      socket.broadcast.emit('chat-message', message)
-    })
-  })*/
 
   //Database
   const sqlite3 = require('sqlite3').verbose();
@@ -32,8 +24,6 @@ if (process.env.NODE_ENV !== 'production') {
     resave: false,
     saveUninitialized: false
   }))
-  app.use(passport.initialize())
-  app.use(passport.session())
   app.use(methodOverride('_method'))
   
   app.get('/', checkAuthenticated, (req, res) => {
@@ -165,13 +155,6 @@ function addMessageToDatabase(message, userID){
   }
 
 
-  /*socket.on('new_message', function(message){
 
-    addMessageToDatabase({message: message, username: socket.username});
-    const username = socket.username
-    console.log(username + ': ' + message);
-    io.sockets.emit("new_message", {username, message});
-  });
-*/
   
   app.listen(80)
